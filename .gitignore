@@ -1,0 +1,51 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+
+# Build outputs
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.sln.docstates
+.vs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# Generated plugins
+Output/
+**/build/
+**/CMakeFiles/
+**/cmake_install.cmake
+**/CMakeCache.txt
+
+# JUCE specific
+JUCE/
+Dependencies/
+*.jucer
+
+# Temporary files
+*.swp
+*.swo
+*~
+.tmp

@@ -1,0 +1,460 @@
+{
+  "groups": [
+    {
+      "id": "juceSetup",
+      "label": "JUCE Framework Setup",
+      "description": "Configure JUCE framework location",
+      "fields": [
+        {
+          "id": "jucePathMode",
+          "type": "select",
+          "label": "JUCE Setup Method",
+          "options": [
+            {
+              "label": "Use find_package (auto-discovery)",
+              "value": "find_package"
+            },
+            {
+              "label": "Use add_subdirectory (manual path)",
+              "value": "add_subdirectory"
+            }
+          ],
+          "default": "find_package",
+          "required": true,
+          "help": {
+            "short": "How to locate JUCE in the CMakeLists.txt",
+            "long": "find_package: Uses installed JUCE via CMAKE_PREFIX_PATH. add_subdirectory: Specify a manual path to JUCE source directory for local development."
+          }
+        },
+        {
+          "id": "jucePath",
+          "type": "filePath",
+          "label": "JUCE Root Directory",
+          "placeholder": "/path/to/JUCE",
+          "required": false,
+          "visibleIf": {
+            "field": "jucePathMode",
+            "equals": "add_subdirectory"
+          },
+          "help": {
+            "short": "Path to JUCE source directory (only for add_subdirectory mode)",
+            "long": "Browse and select the root directory of JUCE framework. This should contain the modules/ subdirectory."
+          }
+        }
+      ]
+    },
+    {
+      "id": "basicInfo",
+      "label": "Basic Information",
+      "description": "Core plugin identification and versioning",
+      "fields": [
+        {
+          "id": "pluginName",
+          "type": "text",
+          "label": "Plugin Name",
+          "placeholder": "MyAwesomePlugin",
+          "required": true,
+          "validation": {
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_]+$"
+          },
+          "help": {
+            "short": "The name of your plugin as shown in DAW plugin lists",
+            "long": "This is the human-readable name displayed in your DAW's plugin browser. Use alphanumeric characters and underscores only. Examples: MyCompressor, SynthWave, EQPro"
+          }
+        },
+        {
+          "id": "productName",
+          "type": "text",
+          "label": "Product Name",
+          "placeholder": "MyAwesomePlugin",
+          "required": false,
+          "validation": {
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "help": {
+            "short": "Name of the output binary/bundle (defaults to plugin name if not specified)",
+            "long": "Similar to CMake's OUTPUT_NAME property. Defaults to the plugin name if left empty."
+          }
+        },
+        {
+          "id": "version",
+          "type": "text",
+          "label": "Version",
+          "placeholder": "1.0.0",
+          "required": false,
+          "validation": {
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "help": {
+            "short": "Plugin version in format major.minor.bugfix",
+            "long": "Example: 1.0.0, 2.1.3, etc. Used for version tracking and updates."
+          }
+        },
+        {
+          "id": "buildVersion",
+          "type": "text",
+          "label": "Build Version",
+          "placeholder": "1.0.0",
+          "required": false,
+          "validation": {
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "help": {
+            "short": "Build/internal version (macOS: CFBundleVersion)",
+            "long": "On Apple platforms, this is the private version string to distinguish builds. Format: major.minor.bugfix. Defaults to VERSION if not specified."
+          }
+        },
+        {
+          "id": "bundleId",
+          "type": "text",
+          "label": "Bundle ID",
+          "placeholder": "com.yourcompany.myawesomeplugin",
+          "required": false,
+          "validation": {
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*$"
+          },
+          "help": {
+            "short": "Unique bundle identifier (com.company.product format)",
+            "long": "Must be unique. Used mainly for macOS builds. Example: com.yourcompany.myplugin. Auto-generated if not specified."
+          }
+        },
+        {
+          "id": "companyName",
+          "type": "text",
+          "label": "Company Name",
+          "placeholder": "YourCompany",
+          "required": true,
+          "validation": {
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "help": {
+            "short": "Your company or personal name",
+            "long": "Appears in plugin metadata, Info.plist, and packaging. Used for branding and identification."
+          }
+        }
+      ]
+    },
+    {
+      "id": "pluginIdentity",
+      "label": "Plugin Identity & Description",
+      "description": "Unique identifiers and plugin metadata",
+      "fields": [
+        {
+          "id": "description",
+          "type": "textarea",
+          "label": "Plugin Description",
+          "placeholder": "A short description of what your plugin does",
+          "required": false,
+          "validation": {
+            "maxLength": 500
+          },
+          "help": {
+            "short": "Brief description of your plugin's purpose",
+            "long": "A short text describing what your plugin does. This may appear in DAW plugin information."
+          }
+        },
+        {
+          "id": "pluginManufacturerCode",
+          "type": "text",
+          "label": "Plugin Manufacturer Code (4 chars)",
+          "placeholder": "Manu",
+          "required": false,
+          "validation": {
+            "minLength": 4,
+            "maxLength": 4,
+            "pattern": "^[A-Za-z0-9]*[A-Z][A-Za-z0-9]*$"
+          },
+          "help": {
+            "short": "Unique 4-character company identifier",
+            "long": "Must contain at least one uppercase letter. GarageBand 10.3 requires first letter uppercase, rest lowercase. Default: Manu"
+          }
+        },
+        {
+          "id": "pluginCode",
+          "type": "text",
+          "label": "Plugin Code (4 chars)",
+          "placeholder": "Plug",
+          "required": false,
+          "validation": {
+            "minLength": 4,
+            "maxLength": 4,
+            "pattern": "^[A-Za-z0-9]*[A-Z][A-Za-z0-9]*[^A-Z]$|^[A-Za-z0-9]*[A-Z][A-Za-z0-9]*$"
+          },
+          "help": {
+            "short": "Unique 4-character plugin identifier",
+            "long": "Must contain exactly one uppercase letter. Used for AU compatibility. Auto-generated if not specified. Example: MyPN, Eq01"
+          }
+        }
+      ]
+    },
+    {
+      "id": "audioSettings",
+      "label": "Audio Capabilities",
+      "description": "Configure audio processing and MIDI behavior",
+      "fields": [
+        {
+          "id": "isSynth",
+          "type": "checkbox",
+          "label": "Is Synth/Instrument",
+          "default": false,
+          "help": {
+            "short": "Mark plugin as a synthesizer/instrument",
+            "long": "When enabled, plugin is treated as a MIDI instrument (synth). When disabled, it's an audio effect. Affects default plugin categorization."
+          }
+        },
+        {
+          "id": "needsMidiInput",
+          "type": "checkbox",
+          "label": "Needs MIDI Input",
+          "default": false,
+          "help": {
+            "short": "Plugin accepts MIDI messages",
+            "long": "Enable to allow DAW to send MIDI note data and CC messages to your plugin. Essential for synths and MIDI-controlled effects."
+          }
+        },
+        {
+          "id": "needsMidiOutput",
+          "type": "checkbox",
+          "label": "Needs MIDI Output",
+          "default": false,
+          "help": {
+            "short": "Plugin generates MIDI messages",
+            "long": "Enable if your plugin produces MIDI data for controlling other instruments or sending note information to the DAW."
+          }
+        },
+        {
+          "id": "isMidiEffect",
+          "type": "checkbox",
+          "label": "Is MIDI Effect",
+          "default": false,
+          "help": {
+            "short": "Mark as a MIDI processor/effect",
+            "long": "DAWs typically provide a special channel-strip location for MIDI effect plugins. Enable if your plugin processes/transforms MIDI data."
+          }
+        },
+        {
+          "id": "editorWantsKeyboardFocus",
+          "type": "checkbox",
+          "label": "Editor Wants Keyboard Focus",
+          "default": false,
+          "help": {
+            "short": "Plugin editor handles all keyboard input",
+            "long": "When enabled, your plugin editor receives all keyboard events. When disabled, DAW handles keyboard shortcuts."
+          }
+        }
+      ]
+    },
+    {
+      "id": "pluginFormats",
+      "label": "Plugin Formats",
+      "description": "Select target plugin formats and platforms",
+      "fields": [
+        {
+          "id": "formats",
+          "type": "multiselect",
+          "label": "Build Formats",
+          "options": [
+            {
+              "label": "VST3 (Recommended)",
+              "value": "VST3",
+              "platforms": ["windows", "macos", "linux"],
+              "description": "Modern VST standard with improved I/O capabilities"
+            },
+            {
+              "label": "VST2 (Legacy)",
+              "value": "VST",
+              "platforms": ["windows", "macos", "linux"],
+              "description": "Legacy VST format (requires VST2 SDK)"
+            },
+            {
+              "label": "AU (macOS Audio Unit)",
+              "value": "AU",
+              "platforms": ["macos"],
+              "description": "macOS native plugin format"
+            },
+            {
+              "label": "AUv3 (iOS/macOS)",
+              "value": "AUv3",
+              "platforms": ["macos", "ios"],
+              "description": "Apple's modern audio unit format (Xcode generator required for iOS)"
+            },
+            {
+              "label": "AAX (Pro Tools)",
+              "value": "AAX",
+              "platforms": ["windows", "macos"],
+              "description": "Pro Tools plugin format (requires AAX SDK)"
+            },
+            {
+              "label": "LV2 (Linux)",
+              "value": "LV2",
+              "platforms": ["linux", "windows"],
+              "description": "Open plugin standard, primary on Linux"
+            },
+            {
+              "label": "Standalone",
+              "value": "Standalone",
+              "platforms": ["windows", "macos", "linux"],
+              "description": "Standalone application version of your plugin"
+            },
+            {
+              "label": "Unity",
+              "value": "Unity",
+              "platforms": ["windows", "macos"],
+              "description": "Unity native plugin format"
+            }
+          ],
+          "default": ["VST3"],
+          "required": true,
+          "help": {
+            "short": "Select which plugin formats to generate",
+            "long": "VST3 is recommended for new plugins. AU is macOS-only, AAX requires Pro Tools SDK, etc. Unsupported formats for your OS will show an error."
+          }
+        }
+      ]
+    },
+    {
+      "id": "vst3Settings",
+      "label": "VST3 Configuration",
+      "description": "VST3 format specific options",
+      "fields": [
+        {
+          "id": "vst3Categories",
+          "type": "multiselect",
+          "label": "VST3 Categories",
+          "options": [
+            { "label": "Fx", "value": "Fx", "description": "Audio effect" },
+            { "label": "Instrument", "value": "Instrument", "description": "Synthesizer/instrument" },
+            { "label": "Analyzer", "value": "Analyzer", "description": "Spectrum/analysis tool" },
+            { "label": "Delay", "value": "Delay", "description": "Delay effect" },
+            { "label": "Distortion", "value": "Distortion", "description": "Distortion/saturation" },
+            { "label": "Drum", "value": "Drum", "description": "Drum synth/sampler" },
+            { "label": "Dynamics", "value": "Dynamics", "description": "Compressor/limiter/gate" },
+            { "label": "EQ", "value": "EQ", "description": "Equalizer" },
+            { "label": "External", "value": "External", "description": "External plugin" },
+            { "label": "Filter", "value": "Filter", "description": "Filter effect" },
+            { "label": "Generator", "value": "Generator", "description": "Tone/noise generator" },
+            { "label": "Mastering", "value": "Mastering", "description": "Mastering processor" },
+            { "label": "Modulation", "value": "Modulation", "description": "Modulation effect" },
+            { "label": "Mono", "value": "Mono", "description": "Mono processor" },
+            { "label": "Network", "value": "Network", "description": "Network plugin" },
+            { "label": "NoOfflineProcess", "value": "NoOfflineProcess", "description": "Real-time only" },
+            { "label": "OnlyOfflineProcess", "value": "OnlyOfflineProcess", "description": "Offline processing only" },
+            { "label": "OnlyRT", "value": "OnlyRT", "description": "Real-time only" },
+            { "label": "Pitch Shift", "value": "Pitch Shift", "description": "Pitch shifter" },
+            { "label": "Restoration", "value": "Restoration", "description": "Audio restoration" },
+            { "label": "Reverb", "value": "Reverb", "description": "Reverb/convolver" },
+            { "label": "Sampler", "value": "Sampler", "description": "Sample player" },
+            { "label": "Spatial", "value": "Spatial", "description": "Spatial processing" },
+            { "label": "Stereo", "value": "Stereo", "description": "Stereo processor" },
+            { "label": "Surround", "value": "Surround", "description": "Surround sound" },
+            { "label": "Synth", "value": "Synth", "description": "Synthesizer" },
+            { "label": "Tools", "value": "Tools", "description": "Utility tool" },
+            { "label": "Up-Downmix", "value": "Up-Downmix", "description": "Channel format converter" }
+          ],
+          "required": false,
+          "help": {
+            "short": "Categorize plugin in VST3 hosts",
+            "long": "Select categories that describe your plugin. Multiple selections allowed. Auto-defaults to 'Instrument Synth' if IS_SYNTH is true, otherwise 'Fx'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "permissions",
+      "label": "macOS/iOS Permissions",
+      "description": "Request system permissions for macOS/iOS",
+      "fields": [
+        {
+          "id": "microphonePermissionEnabled",
+          "type": "checkbox",
+          "label": "Request Microphone Permission",
+          "default": false,
+          "help": {
+            "short": "Add NSMicrophoneUsageDescription to Info.plist",
+            "long": "Enable if your plugin needs to access microphone input. Adds permission request dialog on macOS/iOS."
+          }
+        },
+        {
+          "id": "microphonePermissionText",
+          "type": "textarea",
+          "label": "Microphone Permission Text",
+          "placeholder": "This plugin needs microphone access to process audio input",
+          "required": false,
+          "visibleIf": {
+            "field": "microphonePermissionEnabled",
+            "equals": true
+          },
+          "validation": {
+            "maxLength": 500
+          },
+          "help": {
+            "short": "User-facing explanation for microphone permission",
+            "long": "This text will be shown when macOS/iOS requests permission. Be clear and concise about why you need microphone access."
+          }
+        },
+        {
+          "id": "cameraPermissionEnabled",
+          "type": "checkbox",
+          "label": "Request Camera Permission",
+          "default": false,
+          "help": {
+            "short": "Add NSCameraUsageDescription to Info.plist",
+            "long": "Enable if your plugin needs camera access (rare for audio plugins)."
+          }
+        },
+        {
+          "id": "bluetoothPermissionEnabled",
+          "type": "checkbox",
+          "label": "Request Bluetooth Permission",
+          "default": false,
+          "help": {
+            "short": "Add NSBluetoothAlwaysUsageDescription to Info.plist",
+            "long": "Enable if your plugin controls or connects to Bluetooth audio devices."
+          }
+        }
+      ]
+    },
+    {
+      "id": "advancedSettings",
+      "label": "Advanced Settings",
+      "description": "Fine-tune generation and build options",
+      "fields": [
+        {
+          "id": "enableGui",
+          "type": "checkbox",
+          "label": "Create GUI Editor",
+          "default": true,
+          "help": {
+            "short": "Generate visual plugin editor interface",
+            "long": "When enabled, a basic JUCE plugin editor is created. You can customize it with UI components like sliders, buttons, labels, etc."
+          }
+        },
+        {
+          "id": "enableBypass",
+          "type": "checkbox",
+          "label": "Enable Bypass Control",
+          "default": true,
+          "help": {
+            "short": "Add DAW-controlled bypass parameter",
+            "long": "Allows the DAW to bypass your effect, useful for A/B comparison. The plugin will pass audio unchanged in bypass mode."
+          }
+        },
+        {
+          "id": "outputPath",
+          "type": "filePath",
+          "label": "Output Directory",
+          "placeholder": "Select a folder...",
+          "required": true,
+          "help": {
+            "short": "Where to save the generated plugin project",
+            "long": "Choose an empty folder where the complete plugin project will be created. A subfolder with your plugin name will be created inside this location."
+          }
+        }
+      ]
+    }
+  ]
+}

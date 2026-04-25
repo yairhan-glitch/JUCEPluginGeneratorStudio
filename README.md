@@ -2,7 +2,22 @@
 
 A schema-driven web application for generating JUCE CMake-based audio plugins without manual configuration.
 
-**⚠️ ALPHA RELEASE** - This is an early-stage project. See [Disclaimers & Testing Notes](#-disclaimers--testing-notes) below.
+**⚠️ ALPHA RELEASE** - This is an early-stage project. **[READ DISCLAIMER](DISCLAIMER.md) BEFORE USE** - See important disclaimers and risk disclosure.
+
+**📜 Open Source (MIT License)** - Free to use, free to modify. [View License](LICENSE.md) | [Contributing Guidelines](CONTRIBUTING.md)
+
+---
+
+## Quick Links
+
+- 🚨 **[IMPORTANT: Risk Disclaimer & Liability Notice](DISCLAIMER.md)** - Read this first!
+- 📜 **[License Information](LICENSE.md)** - MIT License with attribution requirements
+- 🤝 **[Contributing Guide](CONTRIBUTING.md)** - How to report bugs and submit contributions
+- � **[Code of Conduct](CODE_OF_CONDUCT.md)** - Community standards and expectations
+- �🐛 **[Report Issues](https://github.com/YOUR-REPO/issues)** - Found a bug?
+- 💡 **[Feature Requests](https://github.com/YOUR-REPO/issues)** - Have an idea?
+
+---
 
 ## 🎯 Overview
 
@@ -503,18 +518,89 @@ node -e "console.log(JSON.parse(require('fs').readFileSync('schema/pluginSchema.
 
 ---
 
-## ⚠️ Disclaimers & Testing Notes
+## ⚠️ Disclaimers & Risk Disclosure
 
 ### ALPHA RELEASE WARNING
 
-This is an **alpha-stage project** released for community testing and feedback. While the core functionality has been developed and tested, there may be bugs, incomplete features, or unexpected behavior. 
+This is an **alpha-stage project** released for community testing and feedback. While the core functionality has been developed and tested, there may be bugs, incomplete features, or unexpected behavior.
 
-**Use at your own risk.** The author assumes no responsibility for:
-- Errors or unexpected behavior in generated plugins
-- Failures during the generation process
-- Issues with building, packaging, or distributing generated plugins
-- Damages or data loss resulting from the use of this software
-- Compatibility issues with third-party tools or DAWs
+### ⚠️ USER ASSUMES ALL RISK
+
+**USE AT YOUR OWN RISK.** By using this software, you acknowledge and agree that:
+
+**1. Liability Disclaimer**
+The author, contributors, and copyright holders assume NO responsibility for:
+- Generation failures, bugs, or errors in the plugin generation process
+- Failures during the build/compilation of generated plugins
+- Incompatibility with DAWs, operating systems, or third-party software
+- Loss of data, project files, or work-in-progress
+- Corruption or damage to system files or audio projects
+- Any direct, indirect, incidental, consequential, or punitive damages
+- Loss of profits, revenue, business opportunity, or reputation
+- Security vulnerabilities or breaches in generated code
+- Licensing disputes or intellectual property conflicts
+
+**2. No Warranty**
+This software is provided "AS-IS" without warranty of any kind. There are no guarantees regarding:
+- Functionality or fitness for any particular purpose
+- Compatibility with specific DAWs or hardware
+- Performance, stability, or security
+- Future support or updates
+
+**3. Your Responsibility**
+You are solely responsible for:
+- Thoroughly testing all generated plugins before use or distribution
+- Verifying that generated code complies with all applicable laws and licenses
+- Ensuring compatibility with your target DAWs and systems
+- Security review of generated code and any modifications you make
+- Proper licensing and distribution of your generated plugins
+- Backing up your data and projects
+- Complying with all third-party license requirements
+
+**4. Third-Party Licenses**
+Generated plugins depend on:
+- **JUCE Framework** - Review JUCE's licensing terms
+- **Node.js, React, Express** - Your use implies acceptance of their licenses
+- **CMake** - Subject to CMake's license terms
+- Other dependencies - See respective project licenses
+
+You must comply with the licensing terms of all dependencies.
+
+**5. Platform-Specific Risks**
+- ✅ **Windows 10/11**: Thoroughly tested with MSVC 2022
+- ⚠️ **macOS**: Expected to work but not extensively tested
+- ⚠️ **Linux**: Expected to work but not extensively tested
+
+Testing on untested platforms is at your own risk. Cross-platform compatibility is not guaranteed.
+
+### 📋 Known Limitations
+
+- Schema-based generation primarily supports VST3 format
+- Generated plugins are pass-through templates - you must implement your own DSP
+- Some advanced JUCE features may not yet be exposed in the UI
+- CMakeLists template designed for Windows/macOS/Linux environments
+- No built-in preset system (you can add this yourself)
+- Limited error recovery for invalid configurations
+
+### 🔒 Data & Privacy
+
+- **No Data Collection**: No usage data, telemetry, or analytics are collected
+- **All Processing is Local**: All generation happens on your machine only
+- **No External Servers**: This tool does not communicate with external services
+- **Open Source**: Code is publicly available for security review
+
+### 📝 Before Using This Tool
+
+**Please:**
+1. Read this entire disclaimer carefully
+2. Understand the licensing requirements
+3. Test thoroughly on a non-critical system first
+4. Back up all important data
+5. Review generated code before using in production
+6. Test generated plugins in your DAW before distribution
+7. Keep backups of your original JUCE installations
+
+**If you do not agree to these terms, do not use this software.**
 
 ### Platform Testing Status
 
@@ -525,29 +611,8 @@ This is an **alpha-stage project** released for community testing and feedback. 
 - macOS 12+ (Clang)
 - Linux (GCC)
 
-### Call for Testing on Other Platforms
-
-**We appreciate help from the community!** If you use this tool on:
-- **macOS** (Intel or Apple Silicon)
-- **Linux** (Ubuntu, Fedora, other distributions)
-- **Other Windows versions or toolchains**
-
-Please test it and report your findings! Share:
-1. Operating system and version
-2. Compiler and version used
-3. Whether generation completed successfully
-4. Whether generated plugins compiled
-5. Whether plugins loaded in your DAW
-6. Any errors or unexpected behavior
-
-Create an issue on GitHub with your test results - **your feedback helps make this tool better for everyone!**
-
-### Known Limitations
-
-- Schema-based generation supports VST3 primarily (other formats coming)
-- Generated plugins are pass-through templates (you must implement your DSP)
-- Some advanced JUCE features may not be exposed in the UI yet
-- CMakeLists template is tested for VST3 on Windows/macOS/Linux
+**🤝 Community Help Needed:**
+We need testing on other platforms and configurations. If you test on macOS, Linux, or other setups, please share your results! This helps the community and improves the tool for everyone.
 
 ### Data Privacy
 
@@ -556,36 +621,160 @@ Create an issue on GitHub with your test results - **your feedback helps make th
 - Generated projects remain on your system
 - No telemetry or analytics
 
+
+---
+
+## 📄 License & Legal
+
+### Open Source MIT License
+
+This software is provided under the **MIT License**, which means:
+
+✅ **FREE to use** - No cost, no licensing fees  
+✅ **FREE to modify** - Customize for your needs  
+✅ **FREE to distribute** - Share plugins you create  
+✅ **FREE to use commercially** - Build products with it  
+
+📋 **Attribution Required** - You must include:
+- A copy of the license
+- Notice that work is based on JUCE Plugin Generator Studio
+- Link to original repository
+
+### Important Disclaimers
+
+⚠️ **[READ FULL DISCLAIMER](DISCLAIMER.md)** - Important risk disclosure and liability limitations
+
+**Key Points:**
+- **NO WARRANTY** - Provided as-is without guarantees
+- **USER ASSUMES ALL RISK** - Use at your own risk
+- **NO LIABILITY** - Authors not responsible for damages or issues
+- **YOUR RESPONSIBILITY** - You're responsible for testing and compliance
+
+See [LICENSE.md](LICENSE.md) for complete license terms.
+
 ---
 
 ## 📄 License
 
-MIT License - See LICENSE file for details
+MIT License - See [LICENSE.md](LICENSE.md) for details
 
-You are free to use, modify, and distribute this software and generated plugins.
+You are free to use, modify, and distribute this software and generated plugins in accordance with the MIT License terms.
 
 ---
 
 ## 🤝 Contributing & Reporting Issues
 
-Contributions and bug reports are welcome!
+This is an open-source project, and contributions from the community are greatly appreciated! Whether you're reporting bugs, suggesting features, or submitting code, your input helps improve this tool for everyone.
 
-### Reporting Issues
+### 🐛 Reporting Issues
 
-When reporting bugs, please include:
-- OS and version
-- Node.js/npm versions
-- Steps to reproduce
-- Error messages from browser console or terminal
-- Generated plugin code (if applicable)
+Bug reports are essential for improving the tool. When reporting a bug, please provide:
 
-### Contributing
+**Required Information:**
+- Operating system and version (e.g., Windows 11 22H2, macOS 13.1, Ubuntu 22.04)
+- Node.js and npm versions (`node --version`, `npm --version`)
+- CMake version (`cmake --version`)
+- Compiler and version (MSVC, Clang, GCC with version numbers)
 
-1. Fork the repository
-2. Create a feature branch
-3. Test thoroughly (especially on your OS!)
-4. Submit a pull request with description
-5. Be prepared to discuss and iterate
+**Detailed Steps to Reproduce:**
+1. Clear instructions to reproduce the issue
+2. What you were trying to do
+3. What happened instead
+4. What you expected to happen
+
+**Additional Details:**
+- Error messages from browser console (F12 → Console tab)
+- Terminal error output (full stack traces if available)
+- Generated plugin code or schema modifications (if applicable)
+- Screenshots or logs if helpful
+
+**Platform Testing Results:**
+- If you tested on macOS or Linux, please share your results!
+- Include whether generation succeeded, if compilation worked, and if the plugin loaded
+
+**Example Issue:**
+```
+Title: Plugin generation fails on macOS with Clang 14
+OS: macOS 13.1 (Apple Silicon)
+Node: v18.12.0, npm 8.19.2
+CMake: 3.24.3, Clang 14.0.0
+
+Steps:
+1. Fill form with "TestPlugin" name
+2. Click Generate
+3. Get error message...
+
+Expected: Plugin project to generate successfully
+```
+
+### 💡 Feature Requests
+
+Have an idea for a new feature? We'd love to hear it!
+
+- Describe the feature and why it would be useful
+- Provide example use cases
+- Include any relevant documentation or references
+- Be open to discussion about implementation approach
+
+### 🚀 Contributing Code
+
+Contributions are welcome! Here's how to get started:
+
+**Before You Start:**
+1. Check existing issues and pull requests to avoid duplicates
+2. For large changes, open an issue first to discuss the approach
+3. Ensure the change aligns with the project's scope and design
+
+**Development Process:**
+1. **Fork the repository** on GitHub
+2. **Create a feature branch**: `git checkout -b feature/your-feature-name`
+3. **Make your changes** and commit with clear messages
+4. **Test thoroughly** on your platform:
+   - Run `npm run dev` for both frontend and backend
+   - Test form validation and schema changes
+   - Test plugin generation with various configurations
+   - Build a generated plugin and test in a DAW (if possible)
+5. **Test on other platforms** if possible (macOS/Linux especially appreciated!)
+6. **Submit a pull request** with:
+   - Clear description of changes
+   - Reference any related issues (#123)
+   - List of what you tested
+   - Any breaking changes or migration notes
+
+**Code Standards:**
+- Follow the existing code style and formatting
+- Comment complex logic
+- Use meaningful variable and function names
+- Keep components/modules focused and reusable
+- Test edge cases and error scenarios
+
+**Areas for Contribution:**
+- 🐛 Bug fixes
+- 📱 macOS and Linux platform improvements
+- 🎨 UI/UX enhancements
+- 📚 Documentation improvements
+- 🧪 Test coverage expansion
+- ➕ New plugin formats (AU, AAX, CLAP)
+- 🎛️ New form field types
+- 🚀 Performance improvements
+
+### 📋 Contribution Guidelines
+
+- **Be respectful** and constructive in discussions
+- **Test your changes** thoroughly before submitting
+- **Document your changes** in commits and pull requests
+- **Keep pull requests focused** - one feature/fix per PR
+- **Be responsive** to feedback and discussion
+- **Respect the license** - all contributions will be under MIT license
+
+### 🏆 Recognition
+
+Contributors will be recognized in:
+- GitHub contributors page
+- Project documentation (if applicable)
+- Release notes for their contributions
+
+Thank you for helping make JUCE Plugin Generator Studio better! 🎉
 
 ---
 
